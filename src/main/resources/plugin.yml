@@ -1,0 +1,6 @@
+name: SMPEvents
+version: ${project.version}
+main: daimyou.smpevents.main
+api-version: 1.16
+authors: [ Daimy0u ]
+description: Events for SMP, integrated with placeholder.

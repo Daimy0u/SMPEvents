@@ -1,0 +1,6 @@
+name: SMPEvents
+version: 0.0.1
+author: Daimy0u
+main: main.java.daimyou.smpevents.main
+api-version: 1.14
+softdepend: [PlaceholderAPI]
