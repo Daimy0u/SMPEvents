@@ -14,7 +14,9 @@ public final class main extends JavaPlugin {
     public void onEnable() {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[SMPEvents] Initialized SMPEvents, running on version 0.0.1");
         loadConfig();
-        placeholderIntegration integration = new placeholderIntegration();
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new placeholderIntegration(this).register();
+        }
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
     }
 

@@ -8,6 +8,10 @@ public class placeholderIntegration extends PlaceholderExpansion {
     private main plugin;
     private Plugin plug = main.getPlugin(main.class);
 
+        public placeholderIntegration(main plugin){
+            this.plugin = plugin;
+        }
+
     @Override
     public boolean canRegister() {
         return true;
