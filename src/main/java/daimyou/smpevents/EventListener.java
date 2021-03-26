@@ -22,6 +22,7 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onKill(PlayerDeathEvent e) {
-        
+        String name = e.getEntity().getKiller().getName();
+        eventTrack.updatePlayerCount(name, "PLAYERSKILLED");
     }
 }
