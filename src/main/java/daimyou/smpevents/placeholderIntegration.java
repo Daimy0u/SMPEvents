@@ -4,7 +4,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import daimyou.smpevents.main;
 import org.bukkit.plugin.Plugin;
 
-public abstract class placeholderIntegration extends PlaceholderExpansion {
+public class placeholderIntegration extends PlaceholderExpansion {
     private main plugin;
     private Plugin plug = main.getPlugin(main.class);
 

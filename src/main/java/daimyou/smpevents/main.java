@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.ChatColor;
 import me.clip.placeholderapi.PlaceholderAPI;
 import daimyou.smpevents.EventListener;
+import daimyou.smpevents.placeholderIntegration;
 
 public final class main extends JavaPlugin {
 
@@ -13,6 +14,7 @@ public final class main extends JavaPlugin {
     public void onEnable() {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[SMPEvents] Initialized SMPEvents, running on version 0.0.1");
         loadConfig();
+        placeholderIntegration integration = new placeholderIntegration();
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
     }
 
