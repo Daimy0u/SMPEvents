@@ -1,6 +1,7 @@
 package daimyou.smpevents;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.ChatColor;
 
 public final class main extends JavaPlugin {
 

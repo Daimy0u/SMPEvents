@@ -1,22 +1,22 @@
 package daimyou.smpevents;
-
+import java.util.HashMap;
 
 public class eventTracker {
-    HashMap<string, integer> mobCount = new HashMap<string, integer>();
-    HashMap<string, integer> pvpCount = new HashMap<string, integer>();
-    HashMap<string, integer> expLevelGainedCount = new HashMap<string, integer>();
-    public static void updatePlayerCount(string playername, string value) {
+    HashMap<String, Integer> mobCount = new HashMap<String, Integer>();
+    HashMap<String, Integer> pvpCount = new HashMap<String, Integer>();
+    HashMap<String, Integer> expLevelGainedCount = new HashMap<String, Integer>();
+    public void updatePlayerCount(String playername, String value) {
         switch(value) {
-            case MOBCOUNT: {
+            case "MOBCOUNT": {
                 int newvalue = mobCount.get(playername) + 1;
                 mobCount.put(playername, newvalue);
                 break;
             }
-            case PLAYERSKILLED: {
+            case "PLAYERSKILLED": {
                 pvpCount.put(playername, pvpCount.get(playername) + 1);
                 break;
             }
-            case EXPLEVELGAIN: {
+            case "EXPLEVELGAIN": {
                 expLevelGainedCount.put(playername, expLevelGainedCount.get(playername) + 1);
                 break;
             }
@@ -25,16 +25,16 @@ public class eventTracker {
             }
         }
     }
-    public static int getPlayerCount(string playername, string value) {
+    public int getPlayerCount(String playername, String value) {
         switch(value) {
-            case MOBCOUNT: {
+            case "MOBCOUNT": {
                 return mobCount.get(playername);
 
             }
-            case PLAYERSKILLED: {
+            case "PLAYERSKILLED": {
                 return pvpCount.get(playername);
             }
-            case EXPLEVELGAIN: {
+            case "EXPLEVELGAIN": {
                 return expLevelGainedCount.get(playername);
             }
             default: {
