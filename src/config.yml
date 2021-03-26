@@ -1,4 +1,6 @@
-active-event:
-  - none
-permissions:
-  - smpevents.admin
+active-event: none
+players:
+  userid:
+    mobcount: 0
+    pvpcount: 0
+    lvlcount: 0
