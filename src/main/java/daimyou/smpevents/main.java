@@ -25,6 +25,7 @@ public final class main extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[SMPEvents] Deinitializing SMPEvents");
     }
 
+
     public void loadConfig() {
         getConfig().options().copyDefaults(true);
         getConfig().addDefault("active-event", "none");

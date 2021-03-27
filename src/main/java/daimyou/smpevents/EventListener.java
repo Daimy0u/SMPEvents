@@ -7,8 +7,10 @@ import daimyou.smpevents.eventTracker;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.entity.*;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
+
 public class EventListener implements Listener {
     private Plugin plugin = main.getPlugin(main.class);
     eventTracker eventTrack = new eventTracker();
@@ -18,8 +20,8 @@ public class EventListener implements Listener {
         Entity killer = e.getEntity().getKiller();
 
         if (killer instanceof Player){
-            Player player = e.getEntity().getKiller();
-            eventTrack.updatePlayerCount(player.getName(), "MOBCOUNT");
+            Player player = (Player) e.getEntity().getKiller();
+            eventTrack.updatePlayerCount(player.getName(), "MOBCOUNT", 1);
             plugin.getConfig().set("players." + killer.getUniqueId() + ".pvpcount", (int) plugin.getConfig().get("players." + killer.getUniqueId() + "mobcount") + 1);
         }
     }
@@ -32,9 +34,14 @@ public class EventListener implements Listener {
             return;
         }
         String name = e.getEntity().getKiller().getName();
-        eventTrack.updatePlayerCount(name, "PLAYERSKILLED");
+        eventTrack.updatePlayerCount(name, "PLAYERSKILLED", 1);
         int prevvalue = (int) plugin.getConfig().get("players." + killer.getUniqueId() + ".pvpcount");
         plugin.getConfig().set("players." + killer.getUniqueId() + ".pvpcount", prevvalue + 1);
+    }
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        eventTrack.initializeTracker(e.getPlayer());
+        plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[SMPEvents] Initialized tracker for player " + e.getPlayer());
     }
 }
 //needs lvl addition
