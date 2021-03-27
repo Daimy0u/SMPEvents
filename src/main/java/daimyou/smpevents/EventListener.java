@@ -17,18 +17,24 @@ public class EventListener implements Listener {
     @EventHandler
     public void onDeath(EntityDeathEvent e){
         Entity entity = e.getEntity();
-        Entity killer = e.getEntity().getKiller();
+        if(e.getEntity().getKiller() == null) {
+            return;
+        }
+        if (e.getEntity().getKiller() instanceof Player){
+            try {
+                Player player = e.getEntity().getKiller();
+                eventTrack.updatePlayerCount(player.getName(), "MOBCOUNT", 1);
+                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", (int) plugin.getConfig().get("players." + player.getUniqueId() + "mobcount") + 1);
+            } catch(Exception ex) {
+                plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Exception at EntityDeathEvent!" + ex.getMessage());
+            }
 
-        if (killer instanceof Player){
-            Player player = (Player) e.getEntity().getKiller();
-            eventTrack.updatePlayerCount(player.getName(), "MOBCOUNT", 1);
-            plugin.getConfig().set("players." + killer.getUniqueId() + ".pvpcount", (int) plugin.getConfig().get("players." + killer.getUniqueId() + "mobcount") + 1);
         }
     }
 
     @EventHandler
     public void onKill(PlayerDeathEvent e) {
-        @Nullable Player killer = e.getEntity().getKiller();
+        Player killer = e.getEntity().getKiller();
         if (killer == null) {
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Error finding player in pvpevent!");
             return;
