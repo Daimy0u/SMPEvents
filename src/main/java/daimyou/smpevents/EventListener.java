@@ -20,11 +20,11 @@ public class EventListener implements Listener {
         if(e.getEntity().getKiller() == null) {
             return;
         }
-        if (e.getEntity().getKiller() instanceof Player){
+        if (e.getEntity().getLastDamageCause().getEntity() instanceof Player){
             try {
-                Player player = e.getEntity().getKiller();
+                Player player = (Player) e.getEntity().getLastDamageCause().getEntity();
                 eventTrack.updatePlayerCount(player.getName(), "MOBCOUNT", 1);
-                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", (int) plugin.getConfig().get("players." + player.getUniqueId() + "mobcount") + 1);
+                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", (int) plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount") + 1);
             } catch(Exception ex) {
                 plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Exception at EntityDeathEvent!" + ex.getMessage());
             }

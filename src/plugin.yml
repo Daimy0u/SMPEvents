@@ -3,4 +3,4 @@ version: 0.0.1
 author: Daimy0u
 main: main.java.daimyou.smpevents.main
 api-version: 1.14
-depend: [PlaceholderAPI]
+depend: [PlaceholderAPI, PlaceholderExpansion]

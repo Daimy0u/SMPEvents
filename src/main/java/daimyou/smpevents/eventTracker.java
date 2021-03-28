@@ -33,7 +33,7 @@ public class eventTracker {
         String name = player.getName();
         try {
             if (plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount") == null) {
-                plugin.getConfig().set("players." + player.getUniqueId() + ".mobcount", 0);
+                plugin.getConfig().set("players." + player.getUniqueId() + ".mobcount", "0");
             }
             mobCount.put(name, (Integer) plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount"));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class eventTracker {
         }
         try {
             if (plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount") == null) {
-                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", 0);
+                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", "0");
             }
             pvpCount.put(name, (Integer) plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount"));
         } catch (Exception e) {
