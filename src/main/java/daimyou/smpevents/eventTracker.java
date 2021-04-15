@@ -10,17 +10,17 @@ public class eventTracker {
     HashMap<String, Integer> pvpCount = new HashMap<String, Integer>();
     HashMap<String, Integer> expLevelGainedCount = new HashMap<String, Integer>();
     private Plugin plugin = main.getPlugin(main.class);
-    public void updatePlayerCount(String playername, String value, int value2) {
+    public void updatePlayerCount(String playername, int value, int value2) {
         switch(value) {
-            case "MOBCOUNT": {
+            case 1: {
                 mobCount.put(playername, mobCount.get(playername) + value2);
                 break;
             }
-            case "PLAYERSKILLED": {
+            case 2: {
                 pvpCount.put(playername, pvpCount.get(playername) + value2);
                 break;
             }
-            case "EXPLEVELGAIN": {
+            case 3: {
                 expLevelGainedCount.put(playername, expLevelGainedCount.get(playername) + value2);
                 break;
             }
@@ -32,20 +32,26 @@ public class eventTracker {
     public void initializeTracker(Player player) {
         String name = player.getName();
         try {
-            if (plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount") == null) {
-                plugin.getConfig().set("players." + player.getUniqueId() + ".mobcount", "0");
+            if (plugin.getConfig().getString("players." + player.getUniqueId() + ".mobcount") == null) {
+                plugin.getConfig().set("players." + player.getUniqueId() + ".mobcount", 0);
+                plugin.saveConfig();
             }
-            mobCount.put(name, (Integer) plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount"));
+            String a = plugin.getConfig().getString("players." + player.getUniqueId() + ".mobcount");
+            int aa = Integer.parseInt(a);
+            mobCount.put(name, aa);
         } catch (Exception e) {
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Can't Initialize Trackers!");
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Can't Initialize Trackers: " + e.getMessage());
         }
         try {
-            if (plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount") == null) {
-                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", "0");
+            if (plugin.getConfig().getString("players." + player.getUniqueId() + ".pvpcount") == null) {
+                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", 0);
+                plugin.saveConfig();
             }
-            pvpCount.put(name, (Integer) plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount"));
+            String a = plugin.getConfig().getString("players." + player.getUniqueId() + ".pvpcount");
+            int aa = Integer.parseInt(a);
+            mobCount.put(name, aa);
         } catch (Exception e) {
-            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Can't Initialize Trackers!");
+            plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Can't Initialize Trackers: " + e.getMessage());
         }
 
 

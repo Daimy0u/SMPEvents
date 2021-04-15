@@ -14,17 +14,20 @@ import org.jetbrains.annotations.Nullable;
 public class EventListener implements Listener {
     private Plugin plugin = main.getPlugin(main.class);
     eventTracker eventTrack = new eventTracker();
+
     @EventHandler
-    public void onDeath(EntityDeathEvent e){
+    public void onDeath(final EntityDeathEvent e){
         Entity entity = e.getEntity();
         if(e.getEntity().getKiller() == null) {
             return;
         }
-        if (e.getEntity().getLastDamageCause().getEntity() instanceof Player){
+        if (e.getEntity().getKiller() instanceof Player){
             try {
-                Player player = (Player) e.getEntity().getLastDamageCause().getEntity();
-                eventTrack.updatePlayerCount(player.getName(), "MOBCOUNT", 1);
-                plugin.getConfig().set("players." + player.getUniqueId() + ".pvpcount", (int) plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount") + 1);
+                Player player = (Player) e.getEntity().getKiller();
+                eventTrack.updatePlayerCount(player.getName(), 1, 1);
+                int tmp = plugin.getConfig().getInt("players." + player.getUniqueId() + ".mobcount") + 1;
+                plugin.getConfig().set("players." + player.getUniqueId() + ".mobcount", tmp);
+                plugin.saveConfig();
             } catch(Exception ex) {
                 plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Exception at EntityDeathEvent!" + ex.getMessage());
             }
@@ -40,9 +43,10 @@ public class EventListener implements Listener {
             return;
         }
         String name = e.getEntity().getKiller().getName();
-        eventTrack.updatePlayerCount(name, "PLAYERSKILLED", 1);
-        int prevvalue = (int) plugin.getConfig().get("players." + killer.getUniqueId() + ".pvpcount");
-        plugin.getConfig().set("players." + killer.getUniqueId() + ".pvpcount", prevvalue + 1);
+        eventTrack.updatePlayerCount(name, 2, 1);
+        int vvalue = plugin.getConfig().getInt("players." + killer.getUniqueId() + ".pvpcount") + 1;
+        plugin.getConfig().set("players." + killer.getUniqueId() + ".pvpcount", vvalue);
+        plugin.saveConfig();
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
