@@ -33,17 +33,20 @@ public class placeholderIntegration extends PlaceholderExpansion {
 
         //smpevents_mobcount
         if(identifier.equals("mobcount")){
-            return (String) plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount");
+            String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount").toString();
+            return ret;
         }
 
         //smpevents_pvpcount
         if(identifier.equals("pvpcount")){
-            return (String) plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount");
+            String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount").toString();
+            return ret;
         }
 
         //smpevents_lvlcount
         if(identifier.equals("lvlcount")){
-            return (String) plugin.getConfig().get("players." + player.getUniqueId() + ".lvlcount");
+            String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".lvlcount").toString();
+            return ret;
         }
 
         // We return null if an invalid placeholder (f.e. %example_placeholder3%)
