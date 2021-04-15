@@ -21,6 +21,9 @@ public class EventListener implements Listener {
         if(e.getEntity().getKiller() == null) {
             return;
         }
+        if (plugin.getConfig().getString("active-event") != "mob") {
+            return;
+        }
         if (e.getEntity().getKiller() instanceof Player){
             try {
                 Player player = (Player) e.getEntity().getKiller();
@@ -40,6 +43,9 @@ public class EventListener implements Listener {
         Player killer = e.getEntity().getKiller();
         if (killer == null) {
             plugin.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[SMPEvents] Error finding player in pvpevent!");
+            return;
+        }
+        if (plugin.getConfig().getString("active-event") != "pvp") {
             return;
         }
         String name = e.getEntity().getKiller().getName();

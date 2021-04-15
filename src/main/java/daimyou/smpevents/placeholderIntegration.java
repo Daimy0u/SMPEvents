@@ -28,25 +28,30 @@ public class placeholderIntegration extends PlaceholderExpansion {
     public String getVersion(){
         return "0.0.1";
     }
-
-    public String onRequest(Player player, String identifier){
+    @Override
+    public boolean persist(){
+        return true;
+    }
+    @Override
+    public String onPlaceholderRequest(Player player, String identifier){
 
         //smpevents_mobcount
         if(identifier.equals("mobcount")){
-            String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".mobcount").toString();
+            String ret = plugin.getConfig().getString("players." + player.getUniqueId() + ".mobcount", "Error!");
             return ret;
         }
 
         //smpevents_pvpcount
         if(identifier.equals("pvpcount")){
-            String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".pvpcount").toString();
+            String ret = plugin.getConfig().getString("players." + player.getUniqueId() + ".pvpcount", "Error!");
             return ret;
         }
 
         //smpevents_lvlcount
         if(identifier.equals("lvlcount")){
-            String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".lvlcount").toString();
-            return ret;
+            //String ret = plugin.getConfig().get("players." + player.getUniqueId() + ".lvlcount").toString();
+            //return ret;
+            return "Not Available Yet!";
         }
 
         // We return null if an invalid placeholder (f.e. %example_placeholder3%)
